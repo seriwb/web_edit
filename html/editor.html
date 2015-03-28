@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>文字数カウントしたいだけのページ</title>
+	<script type="text/javascript" src="../js/jquery-2.1.3.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.limitCount.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$("#count_target").limitCount(400);
+		});
+	</script>
+	<style type="text/css">
+	<!--
+		textarea {
+			width: 50em;
+			height: 30em;
+		}
+	//-->
+	</style>
+</head>
+
+<body>
+	<textarea id="count_target"></textarea>
+</body>
+</html>
