@@ -15,32 +15,36 @@
 (function($){
 	// プラグインの対象メソッド
 	$.fn.limitCount = function(size, option) {
-		return $.lcf.limitCount(this, size, option);
+		$.lcf.size = size;
+		return $.lcf.limitCount(this, option);
 	};
 
 	// 独自の名前空間
 	$.lcf = {};
 
+	$.lcf.size = -1;
+
 	// 処理の実態
 	//
 	// target   : 入力フィールド自身 $(target)
-	// size     : 入力可能数
 	// option   : オプション
-	$.lcf.limitCount = function(target, size, option) {
+	$.lcf.limitCount = function(target, option) {
 		var $target = $(target);
-		var firstcount = size - $target.val().length;
+		var firstcount = $.lcf.size - $target.val().length;
 		var selectorval = "#" + $target.attr("id") + " + .count_input";
 
-		$target
-			// カウント数を表示するタグを追加
-			.after("<span class=\"count_input\"></span>")
-			// 文字入力後のカウント
-			.bind("keyup change", function(){
-				var countdown = size - $target.val().length;
-				var selectorval2 = "#" + this.id + " + .count_input";
-				$.lcf.limitCount.textcolor(selectorval2, countdown);
-			});
+		if (($target.next("span.count_input")).size() === 0) {
 
+			$target
+				// カウント数を表示するタグを追加
+				.after("<span class=\"count_input\"></span>")
+				// 文字入力後のカウント
+				.bind("keyup change", function(){
+					var countdown = $.lcf.size - $target.val().length;
+					var selectorval2 = "#" + this.id + " + .count_input";
+					$.lcf.limitCount.textcolor(selectorval2, countdown);
+				});
+		}
 		// 初期カウント表示用
 		$.lcf.limitCount.textcolor(selectorval, firstcount);
 	};

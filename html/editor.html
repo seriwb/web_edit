@@ -7,8 +7,16 @@
 	<script type="text/javascript" src="../js/jquery.limitCount.js"></script>
 	<script type="text/javascript">
 		$(function() {
-			$("#count_target").limitCount(400);
+			updateCount();
+			$("#update").click(function(){
+				updateCount();
+			});
 		});
+
+		var updateCount = function() {
+			var count_num = $("#count_num").val();
+			$("#count_target").limitCount(count_num);
+		};
 	</script>
 	<style type="text/css">
 	<!--
@@ -21,6 +29,7 @@
 </head>
 
 <body>
+	<input id="count_num" type="text" value="1000"/><button id="update">カウント数更新</button><br>
 	<textarea id="count_target"></textarea>
 </body>
 </html>
